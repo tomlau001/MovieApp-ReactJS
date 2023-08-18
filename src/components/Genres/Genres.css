@@ -1,0 +1,24 @@
+.MuiInputBase-formControl {
+  background-color: rgba(48, 48, 48, 0.55);
+}
+
+.css-6hp17o-MuiList-root-MuiMenu-list {
+  background-color: rgba(48, 48, 48);
+}
+
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected {
+  background-color: #1E202E !important;
+}
+
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
+  border-bottom: 1px solid rgb(73, 73, 73) !important;
+}
+
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(183, 183, 183, 0.7) !important;
+  color: rgba(180, 180, 180, 0.6) !important;
+}
+
+#demo-multiple-chip-label {
+  color: rgba(180, 180, 180, 0.6) !important;
+}

@@ -1,0 +1,48 @@
+.card {
+  position: relative;
+  cursor: pointer;
+}
+
+.card-content {
+  padding: 24px 16px;
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  background-color: rgba(23, 23, 23, 0.75);
+  backdrop-filter: blur(3px);
+  transition: .3s ease-in-out;
+}
+
+.movie-title {
+  font-size: 16px;
+}
+
+.card:hover {
+  scale: 1.1;
+  transition: .3s ease-in-out;
+  box-shadow: 0 0 10px 1px rgba(255, 255, 255, 0.4), 0 0 40px 1px rgba(255, 255, 255, 0.4), 0 0 80px 1px rgba(255, 255, 255, 0.4);
+}
+
+.card:hover .card-content {
+  bottom: 0;
+}
+
+.card-subcontent {
+  display: flex;
+  align-items: center;
+  column-gap: 32px;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+.latest {
+  color :#1d9c1d !important;
+}

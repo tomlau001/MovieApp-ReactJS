@@ -1,0 +1,26 @@
+/* navbar */
+.nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 48px;
+  column-gap: 4px;
+  padding-right: 36px;
+}
+
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+  color: rgb(225, 225, 225) !important;
+}
+
+.navlink{
+  position: relative;
+}
+
+.navlink.active::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  border-bottom: 2px solid white;
+  bottom: 0;
+  left: 0;
+}

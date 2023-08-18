@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-family: 'Roboto Mono', monospace;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #000;
+  background-image: url("./assets/bg-img.png");
+  background-size: cover;
+}
+
+
+::-webkit-scrollbar {
+  width: 0;
+}
+

@@ -1,0 +1,33 @@
+/* pages */
+.container {
+  /* text-align: center; */
+  margin-bottom: 36px;
+  margin-top: 24px;
+}
+
+.filterNSearch {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* .filterNSearch {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+} */
+
+.seachBox{
+  width: 400px !important;
+  margin: 24px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
