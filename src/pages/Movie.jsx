@@ -46,7 +46,7 @@ const Movie = () => {
   }, [page, selectedGenres]);
 
   return (
-    <div className="container">
+    <section className="container">
       <Carousel type="movie" />
       <div className="filterNSearch">
         <Genres
@@ -99,7 +99,7 @@ const Movie = () => {
         )}
       </div>
       <PaginationRounded setPage={setPage} numOfPages={numOfPages} />
-    </div>
+    </section>
   );
 };
 

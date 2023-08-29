@@ -21,7 +21,7 @@ const TVseries = () => {
   const updateDocsTitle = () => {
     const title = location.pathname.slice(1);
     document.title = `Movie App | ${title}`;
-  }
+  };
 
   const fetchTVseries = async () => {
     setData([]);
@@ -36,7 +36,7 @@ const TVseries = () => {
   };
 
   useEffect(() => {
-    updateDocsTitle()
+    updateDocsTitle();
   });
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const TVseries = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, selectedGenres]);
   return (
-    <div className="container">
+    <section className="container">
       <Carousel type="tv" />
       <div className="filterNSearch">
         <Genres
@@ -66,10 +66,18 @@ const TVseries = () => {
               <MovieCard
                 key={MoiveCardData.id}
                 id={MoiveCardData.id}
-                title={MoiveCardData.title || MoiveCardData.name || MoiveCardData.original_name}
+                title={
+                  MoiveCardData.title ||
+                  MoiveCardData.name ||
+                  MoiveCardData.original_name
+                }
                 type={"tv"}
                 poster={MoiveCardData.poster_path}
-                date={MoiveCardData.release_date || MoiveCardData.first_air_date || ""}
+                date={
+                  MoiveCardData.release_date ||
+                  MoiveCardData.first_air_date ||
+                  ""
+                }
               />
             ) : (
               // eslint-disable-next-line react/jsx-key
@@ -97,9 +105,8 @@ const TVseries = () => {
             )
         )}
       </div>
-
       <PaginationRounded setPage={setPage} numOfPages={numOfPages} />
-    </div>
+    </section>
   );
 };
 

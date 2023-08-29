@@ -13,13 +13,12 @@ const Trending = () => {
   const [trendingData, setTrendingData] = useState([]);
   const [page, setPage] = useState(1);
   const [numOfPages, SetNumOfPages] = useState();
-  // const [searchData, setSearchData] = useState([]);
   const location = useLocation();
 
   const updateDocsTitle = () => {
     const title = location.pathname.slice(1);
     document.title = `Movie App | ${title}`;
-  }
+  };
 
   const fetchTrending = async () => {
     setTrendingData([]);
@@ -32,66 +31,63 @@ const Trending = () => {
     setTrendingData(data.results);
     SetNumOfPages(data.total_pages);
   };
-  //callback props
-  // const handleSearch = () => {
-  //   setSearchData(searchData);
-  // };
+
 
   useEffect(() => {
-    updateDocsTitle()
-  },[]);
+    updateDocsTitle();
+  }, []);
 
   useEffect(() => {
     fetchTrending();
   }, [page]);
 
   return (
-    <>
-      <div className="container trending">
-        <Carousel type="trending" />
-        <div className="filterNSearch">
-          <SearchBox />
-        </div>
-        <div className="card-container">
-        {/* Array.from({ length: 20 }) */}
-        {(trendingData.length === 0 ? Array.from({ length: 20 }) : trendingData ).map((MoiveCardData, index) =>
-            MoiveCardData ? (
-              <MovieCard
-                key={MoiveCardData.id}
-                id={MoiveCardData.id}
-                title={MoiveCardData.title || MoiveCardData.name}
-                type={MoiveCardData.media_type}
-                poster={MoiveCardData.poster_path}
-                date={MoiveCardData.release_date || MoiveCardData.first_air_date}
-              />
-            ) : (
-              <Stack
+    <section className="container trending">
+      <Carousel type="trending" />
+      <div className="filterNSearch">
+        <SearchBox />
+      </div>
+      <div className="card-container">
+        {(trendingData.length === 0
+          ? Array.from({ length: 20 })
+          : trendingData
+        ).map((MoiveCardData, index) =>
+          MoiveCardData ? (
+            <MovieCard
+              key={MoiveCardData.id}
+              id={MoiveCardData.id}
+              title={MoiveCardData.title || MoiveCardData.name}
+              type={MoiveCardData.media_type}
+              poster={MoiveCardData.poster_path}
+              date={MoiveCardData.release_date || MoiveCardData.first_air_date}
+            />
+          ) : (
+            <Stack
+              key={index}
+              spacing={1}
+              sx={{
+                bgcolor: "grey.700",
+                width: 220,
+                borderRadius: "8px",
+                padding: 1,
+                textAlign: "center",
+              }}
+            >
+              <Skeleton
                 key={index}
-                spacing={1}
-                sx={{
-                  bgcolor: "grey.700",
-                  width: 220,
-                  borderRadius: "8px",
-                  padding: 1,
-                  textAlign: "center",
-                }}
-              >
-                <Skeleton
-                  key={index}
-                  variant="rectangular"
-                  width={200}
-                  height={220}
-                />
-                <Skeleton variant="rounded" width={200} height={60} />
-                <Skeleton animation="wave" />
-                <Skeleton animation="wave" />
-              </Stack>
-            )
-          )}
-        </div>
+                variant="rectangular"
+                width={200}
+                height={220}
+              />
+              <Skeleton variant="rounded" width={200} height={60} />
+              <Skeleton animation="wave" />
+              <Skeleton animation="wave" />
+            </Stack>
+          )
+        )}
       </div>
       <PaginationRounded setPage={setPage} numOfPages={numOfPages} />
-    </>
+    </section>
   );
 };
 

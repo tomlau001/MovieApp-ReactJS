@@ -20,12 +20,10 @@ export default function PaginationRounded({ setPage, numOfPages }) {
       <MuiPagination
         className="pagination"
         size="large"
-        count={numOfPages}
+        count={ numOfPages < 500 ? numOfPages : 500}
         shape="rounded"
         onChange={(e) => handlePageChange(e.target.textContent)}
-        siblingCount={2}
-        hideNextButton={true}
-        hidePrevButton={true}
+        siblingCount={1}
       />
     </ThemeProvider>
   );
