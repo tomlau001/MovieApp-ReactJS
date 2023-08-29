@@ -1,0 +1,43 @@
+
+.filterNSearch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+}
+
+.search {
+  position: relative;
+}
+
+.searchBox{
+  height: 56.5px ;
+  width: 210px ;
+  margin: 24px 0;
+  background-color: rgba(48, 48, 48, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+input::placeholder{
+  color: rgba(180, 180, 180, 0.6) ;
+}
+
+.search-icon{
+  position: absolute;
+  cursor: pointer;
+  top: 40%;
+  right: 4%;
+}
+
+.searchBox:hover{
+  border: 1px solid black;
+}
+
+@media screen and (min-width: 768px) {
+  .searchBox{
+    width: 350px 
+  }
+}

@@ -4,8 +4,9 @@
   display: flex;
   justify-content: space-around;
   padding-top: 48px;
-  column-gap: 4px;
   padding-right: 36px;
+  padding-bottom: 24px;
+  column-gap: 4px;
 }
 
 .css-1e6y48t-MuiButtonBase-root-MuiButton-root {

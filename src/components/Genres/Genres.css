@@ -22,3 +22,13 @@
 #demo-multiple-chip-label {
   color: rgba(180, 180, 180, 0.6) !important;
 }
+
+.genresBox {
+  width: 210px;
+}
+
+@media screen and (min-width: 768px) {
+  .genresBox{
+    width: 350px !important;
+  }
+}

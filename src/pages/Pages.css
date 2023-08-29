@@ -1,26 +1,7 @@
 /* pages */
 .container {
-  /* text-align: center; */
   margin-bottom: 36px;
   margin-top: 24px;
-}
-
-.filterNSearch {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-/* .filterNSearch {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-} */
-
-.seachBox{
-  width: 400px !important;
-  margin: 24px;
 }
 
 .card-container {
@@ -31,3 +12,14 @@
   margin-bottom: 24px;
 }
 
+.trending .filterNSearch .searchBox,
+.home .filterNSearch .searchBox {
+  width: 400px !important;
+}
+
+@media screen and (min-width: 768px) {
+  .trending .filterNSearch .searchBox,
+  .home .filterNSearch .searchBox {
+    width: 600px !important;
+  }
+}

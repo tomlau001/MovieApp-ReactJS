@@ -13,7 +13,6 @@ export default function PaginationRounded({ setPage, numOfPages }) {
   const handlePageChange = (page) => {
     window.scroll(0, 0)
     setPage(page);
-
   };
 
   return (
@@ -24,6 +23,9 @@ export default function PaginationRounded({ setPage, numOfPages }) {
         count={numOfPages}
         shape="rounded"
         onChange={(e) => handlePageChange(e.target.textContent)}
+        siblingCount={2}
+        hideNextButton={true}
+        hidePrevButton={true}
       />
     </ThemeProvider>
   );

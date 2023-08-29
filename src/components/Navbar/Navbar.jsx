@@ -7,18 +7,17 @@ import "./Navbar.css";
 import { Button } from "@mui/material";
 // import SearchBox from "../SearchBox";
 
-
 const Navbar = () => {
   return (
-    <div>
+    <>
       <nav className="nav">
-        <NavLink className="navlink" to="/">
+        <NavLink className="navlink" to="Home">
           <Button variant="text">
             <HomeIcon />
           </Button>
         </NavLink>
 
-        <NavLink className="navlink" to="movie">
+        <NavLink className="navlink" to="Movie">
           <Button variant="text" startIcon={<TheatersIcon />}>
             Movie
           </Button>
@@ -28,18 +27,17 @@ const Navbar = () => {
             TV Series
           </Button>
         </NavLink>
-        <NavLink className="navlink" to="trending">
+        <NavLink className="navlink" to="Trending">
           <Button variant="text" startIcon={<WhatshotIcon />}>
             Trending
           </Button>
         </NavLink>
-        {/* <SearchBox/> */}
       </nav>
-      
+
       <main>
         <Outlet />
       </main>
-    </div>
+    </>
   );
 };
 

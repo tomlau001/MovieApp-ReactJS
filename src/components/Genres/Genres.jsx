@@ -39,7 +39,7 @@ const Genres = ({
 
   return (
     <>
-      <FormControl sx={{ m: 3, width: 400 }}>
+      <FormControl className="genresBox">
         <InputLabel id="demo-multiple-chip-label">Genres</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"

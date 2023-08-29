@@ -12,14 +12,16 @@ import {
   createRoutesFromChildren,
 } from "react-router-dom";
 import { Container } from "@mui/material";
+import Notfound from "./pages/Notfound/Notfound";
 
 const router = createBrowserRouter(
   createRoutesFromChildren(
     <Route path="/" element={<Navbar />}>
-      <Route index element={<Home />} />
-      <Route path="trending" element={<Trending />} />
+      <Route path="Home" element={<Home />} />
+      <Route path="Movie" element={<Movie />} />
+      <Route path="Trending" element={<Trending />} />
       <Route path="TVSeries" element={<TVseries />} />
-      <Route path="movie" element={<Movie />} />
+      <Route path="*" element={<Notfound />} />
     </Route>
   )
 );
