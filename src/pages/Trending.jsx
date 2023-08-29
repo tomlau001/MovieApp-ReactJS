@@ -13,10 +13,10 @@ const Trending = () => {
   const [trendingData, setTrendingData] = useState([]);
   const [page, setPage] = useState(1);
   const [numOfPages, SetNumOfPages] = useState();
-  const [searchData, setSearchData] = useState([]);
+  // const [searchData, setSearchData] = useState([]);
   const location = useLocation();
 
-  const updateTitle = () => {
+  const updateDocsTitle = () => {
     const title = location.pathname.slice(1);
     document.title = `Movie App | ${title}`;
   }
@@ -32,14 +32,13 @@ const Trending = () => {
     setTrendingData(data.results);
     SetNumOfPages(data.total_pages);
   };
-  
   //callback props
-  const handleSearch = () => {
-    setSearchData(searchData);
-  };
+  // const handleSearch = () => {
+  //   setSearchData(searchData);
+  // };
 
   useEffect(() => {
-    updateTitle()
+    updateDocsTitle()
   },[]);
 
   useEffect(() => {
@@ -51,11 +50,11 @@ const Trending = () => {
       <div className="container trending">
         <Carousel type="trending" />
         <div className="filterNSearch">
-          <SearchBox onSubmit={handleSearch} page={page} setSearchData={setSearchData} SetNumOfPages={SetNumOfPages}/>
+          <SearchBox />
         </div>
         <div className="card-container">
         {/* Array.from({ length: 20 }) */}
-        {(searchData.length === 0 ? trendingData : searchData).map((MoiveCardData, index) =>
+        {(trendingData.length === 0 ? Array.from({ length: 20 }) : trendingData ).map((MoiveCardData, index) =>
             MoiveCardData ? (
               <MovieCard
                 key={MoiveCardData.id}

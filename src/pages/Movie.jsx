@@ -19,7 +19,7 @@ const Movie = () => {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const genreURL = useGenre(selectedGenres, genres);
   const location = useLocation()
-  const updateTitle = () => {
+  const updateDocsTitle = () => {
     const title = location.pathname.slice(1);
     document.title = `Movie App | ${title}`;
   }
@@ -38,7 +38,7 @@ const Movie = () => {
   };
 
   useEffect(()=>{
-    updateTitle()
+    updateDocsTitle()
   },[])
 
   useEffect(() => {

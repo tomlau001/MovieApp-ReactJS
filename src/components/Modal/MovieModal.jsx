@@ -31,11 +31,9 @@ export default function MoiveModal({ children, id, type, date, title }) {
   const handleOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
-
   const fetchDetails = async () => {
     const response = await fetch(
       `https://api.themoviedb.org/3/${type}/${id}?api_key=${API_KEY}`
@@ -70,8 +68,12 @@ export default function MoiveModal({ children, id, type, date, title }) {
   const minutesToHours = (minutes) => {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
-    return `${hours}h ${remainingMinutes}m`;
+    return hours === 0
+      ? `${remainingMinutes}m`
+      : `${hours}h ${remainingMinutes}m`;
   };
+
+  const currentYear = new Date().getFullYear().toString();
 
   useEffect(() => {
     fetchDetails();
@@ -118,9 +120,20 @@ export default function MoiveModal({ children, id, type, date, title }) {
               <div className="modal-container">
                 <div className="movie-details">
                   <div className="dateNtime">
-                    <span className="light-color">
-                      {date && date.substring(0, 4)}
-                    </span>
+                    {date && (
+                      <span
+                        className={
+                          date.substring(0, 4) === currentYear
+                            ? "latest"
+                            : "light-color"
+                        }
+                      >
+                        {date.substring(0, 4) === currentYear
+                          ? date.substring(0, 4) + "(Latest)"
+                          : date.substring(0, 4)}
+                      </span>
+                    )}
+
                     <span className="light-color">
                       {runtime ? `${minutesToHours(runtime)}` : ""}
                     </span>
@@ -130,7 +143,7 @@ export default function MoiveModal({ children, id, type, date, title }) {
                     <h5 className="tagline">{tagline}</h5>
                     <p>
                       {!overview
-                        ? ` This ${type || "Content"} does not have any overview information available. `
+                        ? `This ${type} does not have any overview information available. However, be prepared to embark on an unforgettable experience filled with gripping storytelling, intriguing themes, and a world that will captivate your imagination.`
                         : overview.length > 350
                         ? overview.substring(0, 350) + "..."
                         : overview}

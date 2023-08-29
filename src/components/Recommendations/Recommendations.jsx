@@ -9,8 +9,7 @@ const Recommendations = ({ id, type }) => {
   const API_KEY = `984691a982db0dc62bc0e27ae1c406b2`;
   const [recommendations, setRecommendtions] = useState([]);
 
-  const currentYear = new Date().getFullYear();
-  // const movieModalRef = useRef();
+  const currentYear = new Date().getFullYear().toString();
   const theme = createTheme({
     components: {
       MuiButton: {
@@ -22,12 +21,6 @@ const Recommendations = ({ id, type }) => {
       },
     },
   });
-
-  // const handleDelete = () => {
-  //   if(movieModalRef.current){
-  //     movieModalRef.current.remove()
-  //   }
-  // }
 
   const fetchRecommend = async () => {
     const response = await fetch(
@@ -48,7 +41,13 @@ const Recommendations = ({ id, type }) => {
         {recommendations.length > 0 ? (
           "Recommedations"
         ) : (
-          <hr style={{ opacity: 0.3 }} />
+          <>
+            <hr style={{ opacity: 0.3 }} />
+            <br />
+            <p style={{ padding: "8px 0px", lineHeight: "65px" }}>
+              {`We currently do not have any ${type} recommendations available for your selection.`}
+            </p>
+          </>
         )}
       </h2>
       <div className="RCM-container">
@@ -79,22 +78,20 @@ const Recommendations = ({ id, type }) => {
                   <div className="RCM-info">
                     <h2 className="RCM-title">{title || name}</h2>
                     <div className="RCM-subinfo">
-                      <p
+                      <span
                         className={
-                          "light-color" +
-                          " " +
-                          ((release_date || first_air_date).substring(0, 4) ===
-                          "2023"
+                          (release_date || first_air_date).substring(0, 4) ===
+                          currentYear
                             ? "latest"
-                            : "")
+                            : "light-color"
                         }
                       >
                         {(release_date || first_air_date).substring(0, 4) ===
-                        currentYear.toString()
+                        currentYear
                           ? (release_date || first_air_date).substring(0, 4) +
-                            "(latest)"
+                            "(Latest)"
                           : (release_date || first_air_date).substring(0, 4)}
-                      </p>
+                      </span>
                       <p className="light-color">{type}</p>
                     </div>
                     <p className="RCM-overview">

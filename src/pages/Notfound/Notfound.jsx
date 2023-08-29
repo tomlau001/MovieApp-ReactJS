@@ -12,7 +12,7 @@ const Notfound = () => {
         Sorry, we can&#39;t find that page. You&#39;ll find lots to explore on
         the home page.
       </p>
-      <Button variant="outlined" style={{padding:"16px 24px"}} onClick={() => navigate("/")}>
+      <Button variant="outlined" style={{padding:"16px 24px"}} onClick={() => navigate("Home")}>
         Back to Home Page
       </Button>
     </div>

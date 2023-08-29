@@ -32,9 +32,9 @@ export default function MovieCard({ type, date, title, poster, id }) {
             <div className="card-subcontent">
               <h5>{type}</h5>
               {date && (
-                <p className={date.substring(0, 4) === "2023" ? "latest" : ""}>
+                <p className={date.substring(0, 4) === currentYear ? "latest" : ""}>
                   {date.substring(0, 4) === currentYear
-                    ? date.substring(0, 4) + "(latest)"
+                    ? date.substring(0, 4) + "(Latest)"
                     : date.substring(0, 4)}
                 </p>
               )}

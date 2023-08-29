@@ -13,7 +13,7 @@ const Home = () => {
   const [page, setPage] = useState(1);
   const [numOfPages, SetNumOfPages] = useState();
   const location = useLocation();
-  const updateTitle = () => {
+  const updateDocsTitle = () => {
     const title = location.pathname.slice(1);
     document.title = `Movie App | ${title}`;
   }
@@ -31,7 +31,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    updateTitle
+    updateDocsTitle
   }, []);
 
   useEffect(() => {
