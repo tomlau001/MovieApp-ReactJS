@@ -23,7 +23,9 @@ export default function PaginationRounded({ setPage, numOfPages }) {
         count={ numOfPages < 500 ? numOfPages : 500}
         shape="rounded"
         onChange={(e) => handlePageChange(e.target.textContent)}
-        siblingCount={1}
+        siblingCount={2}
+        hidePrevButton={true}
+        hideNextButton={true}
       />
     </ThemeProvider>
   );

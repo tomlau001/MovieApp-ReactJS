@@ -7,8 +7,7 @@ import { Skeleton, Stack } from "@mui/material";
 import Genres from "../components/Genres/Genres";
 import useGenre from "../useGenre";
 import SearchBox from "../components/SearchBox/SearchBox.jsx";
-import { useLocation } from "react-router-dom";
-
+import useDocsTitle from "../useDocsTitle";
 
 const Movie = () => {
   const API_KEY = `984691a982db0dc62bc0e27ae1c406b2`;
@@ -18,14 +17,10 @@ const Movie = () => {
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const genreURL = useGenre(selectedGenres, genres);
-  const location = useLocation()
-  const updateDocsTitle = () => {
-    const title = location.pathname.slice(1);
-    document.title = `Movie App | ${title}`;
-  }
+  useDocsTitle();
 
   const fetchMovie = async () => {
-    setData([])
+    setData([]);
 
     const response = await fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&page=${page}&with_genres=${genreURL}`
@@ -37,12 +32,8 @@ const Movie = () => {
     SetNumOfPages(data.total_pages);
   };
 
-  useEffect(()=>{
-    updateDocsTitle()
-  },[])
-
   useEffect(() => {
-    fetchMovie()
+    fetchMovie();
   }, [page, selectedGenres]);
 
   return (
@@ -68,10 +59,18 @@ const Movie = () => {
               <MovieCard
                 key={MoiveCardData.id}
                 id={MoiveCardData.id}
-                title={MoiveCardData.title || MoiveCardData.name || MoiveCardData.original_name}
+                title={
+                  MoiveCardData.title ||
+                  MoiveCardData.name ||
+                  MoiveCardData.original_name
+                }
                 type="movie"
                 poster={MoiveCardData.poster_path}
-                date={MoiveCardData.release_date || MoiveCardData.first_air_date || ""}
+                date={
+                  MoiveCardData.release_date ||
+                  MoiveCardData.first_air_date ||
+                  ""
+                }
               />
             ) : (
               <Stack

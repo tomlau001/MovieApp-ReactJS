@@ -5,18 +5,14 @@ import MovieCard from "../components/MovieCard/MovieCard";
 import PaginationRounded from "../components/Pagination/Pagination";
 import { Skeleton, Stack } from "@mui/material";
 import SearchBox from "../components/SearchBox/SearchBox.jsx";
-import { useLocation } from "react-router-dom";
+import useDocsTitle from "../useDocsTitle";
 
 const Home = () => {
   const API_KEY = `984691a982db0dc62bc0e27ae1c406b2`;
   const [Homedata, setHomeData] = useState([]);
   const [page, setPage] = useState(1);
   const [numOfPages, SetNumOfPages] = useState();
-  const location = useLocation();
-  const updateDocsTitle = () => {
-    const title = location.pathname.slice(1);
-    document.title = `Movie App | ${title}`;
-  }
+  useDocsTitle();
 
   const fetchHome = async () => {
     setHomeData([]);
@@ -29,10 +25,6 @@ const Home = () => {
     setHomeData(data.results);
     SetNumOfPages(data.total_pages);
   };
-
-  useEffect(() => {
-    updateDocsTitle
-  }, []);
 
   useEffect(() => {
     fetchHome();
@@ -51,10 +43,18 @@ const Home = () => {
               <MovieCard
                 key={MoiveCardData.id}
                 id={MoiveCardData.id}
-                title={MoiveCardData.title || MoiveCardData.name || MoiveCardData.original_name}
+                title={
+                  MoiveCardData.title ||
+                  MoiveCardData.name ||
+                  MoiveCardData.original_name
+                }
                 type={"movie"}
                 poster={MoiveCardData.poster_path}
-                date={MoiveCardData.release_date || MoiveCardData.first_air_date || ""}
+                date={
+                  MoiveCardData.release_date ||
+                  MoiveCardData.first_air_date ||
+                  ""
+                }
               />
             ) : (
               <Stack

@@ -6,20 +6,15 @@ import "./Pages.css";
 import PaginationRounded from "../components/Pagination/Pagination";
 import { Skeleton, Stack } from "@mui/material";
 import SearchBox from "../components/SearchBox/SearchBox";
-import { useLocation } from "react-router-dom";
+import useDocsTitle from "../useDocsTitle";
 
 const Trending = () => {
   const API_KEY = `984691a982db0dc62bc0e27ae1c406b2`;
   const [trendingData, setTrendingData] = useState([]);
   const [page, setPage] = useState(1);
   const [numOfPages, SetNumOfPages] = useState();
-  const location = useLocation();
 
-  const updateDocsTitle = () => {
-    const title = location.pathname.slice(1);
-    document.title = `Movie App | ${title}`;
-  };
-
+  useDocsTitle();
   const fetchTrending = async () => {
     setTrendingData([]);
     const response = await fetch(
@@ -31,11 +26,6 @@ const Trending = () => {
     setTrendingData(data.results);
     SetNumOfPages(data.total_pages);
   };
-
-
-  useEffect(() => {
-    updateDocsTitle();
-  }, []);
 
   useEffect(() => {
     fetchTrending();

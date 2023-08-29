@@ -6,8 +6,8 @@ import { Skeleton, Stack } from "@mui/material";
 import Genres from "../components/Genres/Genres";
 import useGenre from "../useGenre";
 import SearchBox from "../components/SearchBox/SearchBox";
-import { useLocation } from "react-router-dom";
-// import useTitle from "../useTitle";
+// import { useLocation } from "react-router-dom";
+import useDocsTitle from "../useDocsTitle";
 
 const TVseries = () => {
   const API_KEY = `984691a982db0dc62bc0e27ae1c406b2`;
@@ -17,11 +17,7 @@ const TVseries = () => {
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const genreURL = useGenre(selectedGenres, genres);
-  const location = useLocation();
-  const updateDocsTitle = () => {
-    const title = location.pathname.slice(1);
-    document.title = `Movie App | ${title}`;
-  };
+  useDocsTitle()
 
   const fetchTVseries = async () => {
     setData([]);
@@ -34,10 +30,6 @@ const TVseries = () => {
     setData(data.results);
     SetNumOfPages(data.total_pages);
   };
-
-  useEffect(() => {
-    updateDocsTitle();
-  });
 
   useEffect(() => {
     fetchTVseries();
