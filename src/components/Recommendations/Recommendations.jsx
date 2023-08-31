@@ -69,8 +69,9 @@ const Recommendations = ({ id, type }) => {
                       <div className="RCM-img-container">
                         <img
                           src={`https://image.tmdb.org/t/p/w300/${backdrop_path}`}
-                          alt=""
                           className="RCM-img"
+                          alt={title || name}
+                          title={title || name}
                         />
                       </div>
                     </MoiveModal>

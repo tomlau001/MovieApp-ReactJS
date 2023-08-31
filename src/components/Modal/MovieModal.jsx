@@ -2,9 +2,9 @@
 /* eslint-disable react/prop-types */
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import { useEffect, useRef, useState } from "react";
-import "./MovieModal.css";
+import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
+import "./MovieModal.css";
 import CancelSharpIcon from "@mui/icons-material/CancelSharp";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import Recommendations from "../Recommendations/Recommendations";
@@ -28,22 +28,6 @@ export default function MoiveModal({ children, id, type, date, title }) {
   const [open, setOpen] = useState(false);
   const [video, setVideo] = useState([]);
 
-  const MovieModalRef = useRef(null)
-  console.log(MovieModalRef.current);
-
-  useEffect(() => {
-    const MoiveModal = MovieModalRef.current;
-    if (MoiveModal) {
-      MoiveModal.remove();
-    }
-  }, []);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
   const fetchDetails = async () => {
     const response = await fetch(
       `https://api.themoviedb.org/3/${type}/${id}?api_key=${API_KEY}`
@@ -73,7 +57,7 @@ export default function MoiveModal({ children, id, type, date, title }) {
     overview,
     runtime,
     original_language,
-    name
+    name,
   } = details;
 
   const minutesToHours = (minutes) => {
@@ -86,10 +70,17 @@ export default function MoiveModal({ children, id, type, date, title }) {
 
   const currentYear = new Date().getFullYear().toString();
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   useEffect(() => {
     fetchDetails();
     fetchVideo();
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -102,7 +93,7 @@ export default function MoiveModal({ children, id, type, date, title }) {
       >
         <Box sx={style}>
           {details && (
-            <div ref={MovieModalRef} className="details">
+            <div className="details">
               <div className="img-container">
                 <img
                   src={

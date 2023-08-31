@@ -2,12 +2,13 @@
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import "./MovieCard.css";
-import MoiveModal from "../Modal/MovieModal";
+import MovieModal from "../Modal/MovieModal";
+
 export default function MovieCard({ type, date, title, poster, id }) {
   const currentYear = new Date().getFullYear().toString();
   return (
     <>
-      <MoiveModal poster={poster} id={id} type={type} date={date} title={title}>
+      <MovieModal poster={poster} id={id} type={type} date={date} title={title}>
         <Card
           className="card"
           sx={{
@@ -41,7 +42,7 @@ export default function MovieCard({ type, date, title, poster, id }) {
             </div>
           </div>
         </Card>
-      </MoiveModal>
+      </MovieModal>
     </>
   );
 }
