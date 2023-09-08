@@ -1,11 +1,11 @@
+import { Skeleton, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import Carousel from "../components/Carousel/Carousel";
+import Genres from "../components/Genres/Genres";
 import MovieCard from "../components/MovieCard/MovieCard";
 import PaginationRounded from "../components/Pagination/Pagination";
-import { Skeleton, Stack } from "@mui/material";
-import Genres from "../components/Genres/Genres";
-import useGenre from "../useGenre";
 import SearchBox from "../components/SearchBox/SearchBox";
+import useGenre from "../useGenre";
 // import { useLocation } from "react-router-dom";
 import useDocsTitle from "../useDocsTitle";
 

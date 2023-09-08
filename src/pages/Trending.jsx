@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { Skeleton, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import Carousel from "../components/Carousel/Carousel";
 import MovieCard from "../components/MovieCard/MovieCard";
-import "./Pages.css";
 import PaginationRounded from "../components/Pagination/Pagination";
-import { Skeleton, Stack } from "@mui/material";
 import SearchBox from "../components/SearchBox/SearchBox";
 import useDocsTitle from "../useDocsTitle";
+import "./Pages.css";
 
 const Trending = () => {
   const API_KEY = `984691a982db0dc62bc0e27ae1c406b2`;
@@ -24,7 +24,7 @@ const Trending = () => {
       `https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&page=${page}`
     );
     const data = await response.json();
-    console.log(data.results);
+    // console.log(data);
     setTrendingData(data.results);
     SetNumOfPages(data.total_pages);
   };
@@ -39,7 +39,7 @@ const Trending = () => {
       `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${param}&page=${page}`
     );
     const data = await response.json();
-    console.log(data.results);
+    // console.log(data);
     setSearchData(data.results);
     SetNumOfPages(data.total_pages);
   };
@@ -107,7 +107,11 @@ const Trending = () => {
           )
         )}
       </div>
-      <PaginationRounded setPage={setPage} numOfPages={numOfPages} />
+      <PaginationRounded
+        setPage={setPage}
+        numOfPages={numOfPages}
+        page={page}
+      />
     </section>
   );
 };

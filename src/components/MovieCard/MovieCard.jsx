@@ -46,3 +46,4 @@ export default function MovieCard({ type, date, title, poster, id }) {
     </>
   );
 }
+

@@ -17,7 +17,7 @@ import Notfound from "./pages/Notfound/Notfound";
 const router = createBrowserRouter(
   createRoutesFromChildren(
     <Route path="/" element={<Navbar />}>
-      <Route path="Home" element={<Home />} />
+      <Route index path="Home" element={<Home />} />
       <Route path="Movie" element={<Movie />} />
       <Route path="Trending" element={<Trending />} />
       <Route path="TVSeries" element={<TVseries />} />

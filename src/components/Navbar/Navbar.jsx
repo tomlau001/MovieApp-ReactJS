@@ -1,13 +1,14 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import TheatersIcon from "@mui/icons-material/Theaters";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 import HomeIcon from "@mui/icons-material/Home";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import "./Navbar.css";
 import { Button } from "@mui/material";
-// import SearchBox from "../SearchBox";
+import Home from "../../pages/Home";
 
 const Navbar = () => {
+  const location = useLocation()
   return (
     <>
       <nav className="nav">
@@ -35,7 +36,7 @@ const Navbar = () => {
       </nav>
 
       <main>
-        <Outlet />
+        {location.pathname === "/" ? <Home/> : <Outlet/>}
       </main>
     </>
   );

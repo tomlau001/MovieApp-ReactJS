@@ -6,9 +6,8 @@ const SearchBox = ({
   fetchingSearch,
   fetchTrending,
   searchParam,
-  // setPage,
+  setPage,
 }) => {
-
   return (
     <div className="search">
       <input
@@ -17,7 +16,7 @@ const SearchBox = ({
         type="text"
         placeholder="Search by titles..."
         onKeyDown={(e) => {
-          e.key === "Enter" && fetchingSearch(searchParam);
+          e.key === "Enter" && (fetchingSearch(searchParam), setPage(1));
         }}
         value={searchParam}
         onChange={(e) => {
@@ -26,12 +25,14 @@ const SearchBox = ({
           if (value === "") {
             fetchTrending();
           }
+          setPage(1);
         }}
       />
       <SearchOutlinedIcon
         className="search-icon"
         onClick={() => {
           fetchingSearch(searchParam);
+          setPage(1);
         }}
       />
     </div>

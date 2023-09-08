@@ -27,7 +27,6 @@ const Recommendations = ({ id, type }) => {
       `https://api.themoviedb.org/3/${type}/${id}/recommendations?api_key=${API_KEY}`
     );
     const { results } = await response.json();
-
     console.log(results.slice(0, 6));
     setRecommendtions(results.slice(0, 6));
   };
@@ -65,7 +64,13 @@ const Recommendations = ({ id, type }) => {
               backdrop_path && (
                 <div key={id} className="RCM-card">
                   <ThemeProvider theme={theme}>
-                    <MoiveModal type={type} id={id}>
+                    <MoiveModal
+                      type={type}
+                      id={id}
+                      name={name}
+                      title={title}
+
+                    >
                       <div className="RCM-img-container">
                         <img
                           src={`https://image.tmdb.org/t/p/w300/${backdrop_path}`}

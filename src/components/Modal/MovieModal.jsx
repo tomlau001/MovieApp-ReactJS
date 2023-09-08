@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
+import CancelSharpIcon from "@mui/icons-material/CancelSharp";
+import PlayCircleIcon from "@mui/icons-material/PlayCircle";
+import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { useEffect, useState } from "react";
-import { Box } from "@mui/material";
-import "./MovieModal.css";
-import CancelSharpIcon from "@mui/icons-material/CancelSharp";
-import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import Recommendations from "../Recommendations/Recommendations";
+import "./MovieModal.css";
 
 const style = {
   position: "absolute",
@@ -42,12 +42,35 @@ export default function MoiveModal({ children, id, type, date, title }) {
     );
     const { results } = await response.json();
 
-    if (results.length > 0) {
+    if (results?.length > 0) {
       setVideo(results[0].key);
       return;
     }
     setVideo(null);
   };
+
+  useEffect(() => {
+    fetchDetails();
+    fetchVideo();
+  }, [id]);
+
+  const minutesToHours = (minutes) => {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    return hours === 0
+      ? `${remainingMinutes}m`
+      : `${hours}h ${remainingMinutes}m`;
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const currentYear = new Date().getFullYear().toString();
 
   const {
     backdrop_path,
@@ -60,31 +83,13 @@ export default function MoiveModal({ children, id, type, date, title }) {
     name,
   } = details;
 
-  const minutesToHours = (minutes) => {
-    const hours = Math.floor(minutes / 60);
-    const remainingMinutes = minutes % 60;
-    return hours === 0
-      ? `${remainingMinutes}m`
-      : `${hours}h ${remainingMinutes}m`;
-  };
-
-  const currentYear = new Date().getFullYear().toString();
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  useEffect(() => {
-    fetchDetails();
-    fetchVideo();
-  }, [id]);
-
   return (
     <>
-      <Button onClick={handleOpen}>{children}</Button>
+      <Button
+        onClick={handleOpen}
+      >
+        {children}
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

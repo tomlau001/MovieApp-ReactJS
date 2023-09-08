@@ -6,7 +6,7 @@ const useDocsTitle = () => {
   const title = location.pathname.slice(1);
 
   useEffect(() => {
-    document.title = `Movie App | ${title}`;
+    document.title = `Movie App | ${title ? title : "Home"}`
   }, [title]);
 };
 
