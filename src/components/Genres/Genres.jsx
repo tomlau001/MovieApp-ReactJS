@@ -40,7 +40,9 @@ const Genres = ({
   return (
     <>
       <FormControl className="genresBox" sx={{ backgroundColor: "#3030308c" }}>
-        <InputLabel id="demo-multiple-chip-label">Genres</InputLabel>
+        <InputLabel id="demo-multiple-chip-label" sx={{ color: "#b4b4b499" }}>
+          Genres
+        </InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
@@ -57,7 +59,7 @@ const Genres = ({
           )}
         >
           {genres.map((genre) => (
-            <MenuItem key={genre.id} value={genre.name} >
+            <MenuItem key={genre.id} value={genre.name} sx={{ color: "black" }}>
               {genre.name}
             </MenuItem>
           ))}

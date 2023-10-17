@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import "./MovieCard.css";
 import MovieModal from "../Modal/MovieModal";
+import noImg from "../../assets/noImg.png";
 
 export default function MovieCard({ type, date, title, poster, id }) {
   const currentYear = new Date().getFullYear().toString();
@@ -21,11 +22,7 @@ export default function MovieCard({ type, date, title, poster, id }) {
           <CardMedia
             className="card-image "
             sx={{ height: 350 }}
-            image={
-              poster
-                ? `https://image.tmdb.org/t/p/w300/${poster}`
-                : "/src/assets/noImgLarge.png"
-            }
+            image={poster ? `https://image.tmdb.org/t/p/w300/${poster}` : noImg}
             title={title}
           />
           <div className="card-content">
@@ -33,7 +30,11 @@ export default function MovieCard({ type, date, title, poster, id }) {
             <div className="card-subcontent">
               <h5>{type}</h5>
               {date && (
-                <p className={date.substring(0, 4) === currentYear ? "latest" : ""}>
+                <p
+                  className={
+                    date.substring(0, 4) === currentYear ? "latest" : ""
+                  }
+                >
                   {date.substring(0, 4) === currentYear
                     ? date.substring(0, 4) + "(Latest)"
                     : date.substring(0, 4)}
@@ -46,4 +47,3 @@ export default function MovieCard({ type, date, title, poster, id }) {
     </>
   );
 }
-
