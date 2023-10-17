@@ -1,9 +1,9 @@
 .MuiInputBase-formControl {
-  background-color: rgba(48, 48, 48, 0.55);
+  background-color: #3030308c;
 }
 
 .css-6hp17o-MuiList-root-MuiMenu-list {
-  background-color: rgba(48, 48, 48);
+  background-color: #303030;
 }
 
 .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected {
@@ -23,12 +23,13 @@
   color: rgba(180, 180, 180, 0.6) !important;
 }
 
+
 .genresBox {
   width: 210px;
 }
 
 @media screen and (min-width: 768px) {
-  .genresBox{
+  .genresBox {
     width: 350px !important;
   }
 }

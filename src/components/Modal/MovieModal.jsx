@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import Recommendations from "../Recommendations/Recommendations";
 import "./MovieModal.css";
 import { API_KEY } from "../../config";
+import noImgLarge from "../../assets/noImgLarge.png";
 
 const style = {
   position: "absolute",
@@ -99,7 +100,7 @@ export default function MoiveModal({ children, id, type, date, title }) {
                   src={
                     backdrop_path
                       ? `https://image.tmdb.org/t/p/w500/${backdrop_path}`
-                      : `/src/assets/noImgLarge.png`
+                      : noImgLarge
                   }
                 />
                 <CancelSharpIcon className="modal-icon" onClick={handleClose} />

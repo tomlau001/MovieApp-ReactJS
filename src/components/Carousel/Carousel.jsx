@@ -7,9 +7,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { useEffect, useState } from "react";
+import noImg from "../../assets/noImg.png";
+import { API_KEY } from "../../config";
 
 const Carousel = ({ type }) => {
-  const API_KEY = `984691a982db0dc62bc0e27ae1c406b2`;
   const [data, setData] = useState([]);
 
   const fetchCarousel = async () => {
@@ -33,57 +34,55 @@ const Carousel = ({ type }) => {
     fetchCarousel();
   }, []);
   return (
-    <>
-      <Swiper
-        slidesPerView={1}
-        spaceBetween={30}
-        autoplay={{
-          delay: 4500,
-          disableOnInteraction: true,
-        }}
-        loop={true}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Autoplay, Pagination, Navigation]}
-      >
-        {data &&
-          data.map(
-            ({ backdrop_path, overview, title, id, name, release_date }) => {
-              return (
-                <SwiperSlide key={id}>
-                  <div className="carousel-content">
-                    {
-                      <h4 className="carousel-title">
-                        {title || name}
-                        {type === "upcoming" &&
-                          ` (Release date: ${release_date
-                            .substring(5)
-                            .split("-")
-                            .reverse()
-                            .join("/")})`}
-                      </h4>
-                    }
-                    <p className="carousel-des">
-                      {overview.length > 260
-                        ? `${overview.substring(0, 260)} ...`
-                        : overview}
-                    </p>
-                  </div>
-                  <img
-                    className="carousel-img"
-                    src={
-                      backdrop_path
-                        ? `https://image.tmdb.org/t/p/w500/${backdrop_path}`
-                        : "src/assets/noImgLarge.png"
-                    }
-                  />
-                </SwiperSlide>
-              );
-            }
-          )}
-      </Swiper>
-    </>
+    <Swiper
+      slidesPerView={1}
+      spaceBetween={30}
+      autoplay={{
+        delay: 4500,
+        disableOnInteraction: true,
+      }}
+      loop={true}
+      pagination={{
+        clickable: true,
+      }}
+      modules={[Autoplay, Pagination, Navigation]}
+    >
+      {data &&
+        data.map(
+          ({ backdrop_path, overview, title, id, name, release_date }) => {
+            return (
+              <SwiperSlide key={id}>
+                <div className="carousel-content">
+                  {
+                    <h4 className="carousel-title">
+                      {title || name}
+                      {type === "upcoming" &&
+                        ` (Release date: ${release_date
+                          .substring(5)
+                          .split("-")
+                          .reverse()
+                          .join("/")})`}
+                    </h4>
+                  }
+                  <p className="carousel-des">
+                    {overview.length > 260
+                      ? `${overview.substring(0, 260)} ...`
+                      : overview}
+                  </p>
+                </div>
+                <img
+                  className="carousel-img"
+                  src={
+                    backdrop_path
+                      ? `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+                      : noImg
+                  }
+                />
+              </SwiperSlide>
+            );
+          }
+        )}
+    </Swiper>
   );
 };
 export default Carousel;

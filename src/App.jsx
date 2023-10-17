@@ -4,7 +4,6 @@ import Home from "./pages/Home.jsx";
 import Movie from "./pages/Movie.jsx";
 import Trending from "./pages/Trending.jsx";
 import TVseries from "./pages/TVseries.jsx";
-
 import {
   Route,
   RouterProvider,

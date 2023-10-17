@@ -11,9 +11,9 @@ import {
 } from "@mui/material";
 import { useEffect } from "react";
 import "./Genres.css";
+import { API_KEY } from "../../config";
 
 const Genres = ({
-  API_KEY,
   type,
   setGenres,
   genres,
@@ -39,7 +39,7 @@ const Genres = ({
 
   return (
     <>
-      <FormControl className="genresBox">
+      <FormControl className="genresBox" sx={{ backgroundColor: "#3030308c" }}>
         <InputLabel id="demo-multiple-chip-label">Genres</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
@@ -57,7 +57,7 @@ const Genres = ({
           )}
         >
           {genres.map((genre) => (
-            <MenuItem key={genre.id} value={genre.name}>
+            <MenuItem key={genre.id} value={genre.name} >
               {genre.name}
             </MenuItem>
           ))}
