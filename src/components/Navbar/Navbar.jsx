@@ -8,7 +8,7 @@ import { Button } from "@mui/material";
 import Home from "../../pages/Home";
 
 const Navbar = () => {
-  const location = useLocation()
+  const location = useLocation();
   return (
     <>
       <nav className="nav">
@@ -17,7 +17,6 @@ const Navbar = () => {
             <HomeIcon />
           </Button>
         </NavLink>
-
         <NavLink className="navlink" to="Movie">
           <Button variant="text" startIcon={<TheatersIcon />}>
             Movie
@@ -35,9 +34,7 @@ const Navbar = () => {
         </NavLink>
       </nav>
 
-      <main>
-        {location.pathname === "/" ? <Home/> : <Outlet/>}
-      </main>
+      <main>{location.pathname === "/" ? <Home /> : <Outlet />}</main>
     </>
   );
 };

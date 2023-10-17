@@ -6,15 +6,17 @@ import MovieCard from "../components/MovieCard/MovieCard";
 import PaginationRounded from "../components/Pagination/Pagination";
 import SearchBox from "../components/SearchBox/SearchBox";
 import useDocsTitle from "../useDocsTitle";
+import { API_KEY } from "../config";
+
 import "./Pages.css";
 
 const Trending = () => {
-  const API_KEY = `984691a982db0dc62bc0e27ae1c406b2`;
   const [trendingData, setTrendingData] = useState([]);
-  const [searchData, setSearchData] = useState([]);
-  const [searchParam, setSearchParam] = useState("");
   const [page, setPage] = useState(1);
   const [numOfPages, SetNumOfPages] = useState();
+
+  const [searchData, setSearchData] = useState([]);
+  const [searchParam, setSearchParam] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   useDocsTitle();
 
@@ -24,7 +26,6 @@ const Trending = () => {
       `https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&page=${page}`
     );
     const data = await response.json();
-    // console.log(data);
     setTrendingData(data.results);
     SetNumOfPages(data.total_pages);
   };
@@ -39,7 +40,6 @@ const Trending = () => {
       `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${param}&page=${page}`
     );
     const data = await response.json();
-    // console.log(data);
     setSearchData(data.results);
     SetNumOfPages(data.total_pages);
   };
@@ -57,13 +57,15 @@ const Trending = () => {
       <Carousel type="trending" />
       <div className="filterNSearch">
         <SearchBox
+          setIsSearching={setIsSearching}
           setSearchParam={setSearchParam}
           searchParam={searchParam}
           fetchingSearch={fetchingSearch}
-          fetchTrending={fetchTrending}
+          fetchData={fetchTrending}
           setPage={setPage}
         />
       </div>
+
       <div className="card-container">
         {isSearching && searchData.length === 0 ? (
           <p>{`No Results Related to "${searchParam}"`}</p>

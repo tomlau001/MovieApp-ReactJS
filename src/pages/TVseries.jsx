@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Skeleton, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import Carousel from "../components/Carousel/Carousel";
@@ -6,35 +7,58 @@ import MovieCard from "../components/MovieCard/MovieCard";
 import PaginationRounded from "../components/Pagination/Pagination";
 import SearchBox from "../components/SearchBox/SearchBox";
 import useGenre from "../useGenre";
-// import { useLocation } from "react-router-dom";
 import useDocsTitle from "../useDocsTitle";
+import { API_KEY } from "../config";
 
 const TVseries = () => {
-  const API_KEY = `984691a982db0dc62bc0e27ae1c406b2`;
-  const [data, setData] = useState([]);
+  const [tvSeriesData, setTVSeriesData] = useState([]);
   const [page, setPage] = useState(1);
-  const [numOfPages, SetNumOfPages] = useState();
+  const [numOfPages, setNumOfPages] = useState();
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const genreURL = useGenre(selectedGenres, genres);
-  useDocsTitle()
 
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchParam, setSearchParam] = useState("");
+  const [searchData, setSearchData] = useState([]);
+
+  useDocsTitle();
   const fetchTVseries = async () => {
-    setData([]);
+    setTVSeriesData([]);
     const response = await fetch(
       `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&page=${page}&with_genres=${genreURL}`
     );
     const data = await response.json();
 
     console.log(data.results);
-    setData(data.results);
-    SetNumOfPages(data.total_pages);
+    setTVSeriesData(data.results);
+    setNumOfPages(data.total_pages);
+  };
+
+  const fetchingSearch = async (param) => {
+    setIsSearching(true);
+    setSelectedGenres([]);
+
+    if (param === "") {
+      fetchTVseries();
+      return;
+    }
+    const response = await fetch(
+      `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${param}&page=${page}`
+    );
+    const data = await response.json();
+    setSearchData(data.results);
+    setNumOfPages(data.total_pages);
   };
 
   useEffect(() => {
-    fetchTVseries();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, selectedGenres]);
+    if (isSearching) {
+      fetchingSearch(searchParam);
+    } else {
+      fetchTVseries();
+    }
+  }, [searchParam, page, selectedGenres]);
+
   return (
     <section className="container">
       <Carousel type="tv" />
@@ -48,56 +72,70 @@ const TVseries = () => {
           selectedGenres={selectedGenres}
           setSelectedGenres={setSelectedGenres}
         />
-        <SearchBox />
+        <SearchBox
+          setIsSearching={setIsSearching}
+          setSearchParam={setSearchParam}
+          searchParam={searchParam}
+          fetchingSearch={fetchingSearch}
+          fetchData={fetchTVseries}
+          setPage={setPage}
+        />
       </div>
 
       <div className="card-container">
-        {(data.length === 0 ? Array.from({ length: 20 }) : data).map(
-          (MoiveCardData, index) =>
-            MoiveCardData ? (
-              <MovieCard
-                key={MoiveCardData.id}
-                id={MoiveCardData.id}
-                title={
-                  MoiveCardData.title ||
-                  MoiveCardData.name ||
-                  MoiveCardData.original_name
-                }
-                type={"tv"}
-                poster={MoiveCardData.poster_path}
-                date={
-                  MoiveCardData.release_date ||
-                  MoiveCardData.first_air_date ||
-                  ""
-                }
-              />
-            ) : (
-              // eslint-disable-next-line react/jsx-key
-              <Stack
-                key={index}
-                spacing={1}
-                sx={{
-                  bgcolor: "grey.700",
-                  width: 220,
-                  borderRadius: "8px",
-                  padding: 1,
-                  textAlign: "center",
-                }}
-              >
-                <Skeleton
-                  key={index}
-                  variant="rectangular"
-                  width={200}
-                  height={220}
+        {isSearching && searchData.length === 0 ? (
+          <p>{`No Results Related to "${searchParam}"`}</p>
+        ) : (
+          (isSearching ? searchData : tvSeriesData).map(
+            (MovieCardData, index) =>
+              MovieCardData ? (
+                <MovieCard
+                  key={MovieCardData.id}
+                  id={MovieCardData.id}
+                  title={
+                    MovieCardData.title ||
+                    MovieCardData.name ||
+                    MovieCardData.original_name
+                  }
+                  type={MovieCardData.media_type || "tv"}
+                  poster={MovieCardData.poster_path}
+                  date={
+                    MovieCardData.release_date ||
+                    MovieCardData.first_air_date ||
+                    ""
+                  }
                 />
-                <Skeleton variant="rounded" width={200} height={60} />
-                <Skeleton animation="wave" />
-                <Skeleton animation="wave" />
-              </Stack>
-            )
+              ) : (
+                <Stack
+                  key={index}
+                  spacing={1}
+                  sx={{
+                    bgcolor: "grey.700",
+                    width: 220,
+                    borderRadius: "8px",
+                    padding: 1,
+                    textAlign: "center",
+                  }}
+                >
+                  <Skeleton
+                    key={index}
+                    variant="rectangular"
+                    width={200}
+                    height={220}
+                  />
+                  <Skeleton variant="rounded" width={200} height={60} />
+                  <Skeleton animation="wave" />
+                  <Skeleton animation="wave" />
+                </Stack>
+              )
+          )
         )}
       </div>
-      <PaginationRounded setPage={setPage} numOfPages={numOfPages} />
+      <PaginationRounded
+        setPage={setPage}
+        numOfPages={numOfPages}
+        page={page}
+      />
     </section>
   );
 };

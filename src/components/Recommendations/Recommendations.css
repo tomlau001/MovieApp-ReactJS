@@ -4,7 +4,6 @@
   grid-gap: 20px;
   justify-items: center;
   align-items: stretch;
-  /* height: 100%; */
   margin: 8px 32px;
   padding: 4px 16px;
 }
@@ -20,7 +19,6 @@
 .RCM-img-container {
   width: 100%;
   position: relative;
-  cursor: pointer;
 }
 
 .css-1e6y48t-MuiButtonBase-root-MuiButton-root{

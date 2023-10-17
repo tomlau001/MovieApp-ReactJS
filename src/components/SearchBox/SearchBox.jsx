@@ -2,9 +2,9 @@
 import "./SearchBox.css";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 const SearchBox = ({
+  setIsSearching,
   setSearchParam,
   fetchingSearch,
-  fetchTrending,
   searchParam,
   setPage,
 }) => {
@@ -22,9 +22,7 @@ const SearchBox = ({
         onChange={(e) => {
           const value = e.target.value;
           setSearchParam(value);
-          if (value === "") {
-            fetchTrending();
-          }
+          setIsSearching(value !== "");
           setPage(1);
         }}
       />

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import {
   Box,
@@ -34,7 +35,6 @@ const Genres = ({
 
   useEffect(() => {
     fetchGenres();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

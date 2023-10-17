@@ -8,33 +8,57 @@ import Genres from "../components/Genres/Genres";
 import useGenre from "../useGenre";
 import SearchBox from "../components/SearchBox/SearchBox.jsx";
 import useDocsTitle from "../useDocsTitle";
+import { API_KEY } from "../config";
+
 
 const Movie = () => {
-  const API_KEY = `984691a982db0dc62bc0e27ae1c406b2`;
-  const [data, setData] = useState([]);
+  const [movieData, setMovieData] = useState([]);
   const [page, setPage] = useState(1);
-  const [numOfPages, SetNumOfPages] = useState();
+  const [numOfPages, setNumOfPages] = useState();
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const genreURL = useGenre(selectedGenres, genres);
+
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchParam, setSearchParam] = useState("");
+  const [searchData, setSearchData] = useState([]);
+
   useDocsTitle();
-
   const fetchMovie = async () => {
-    setData([]);
-
+    setMovieData([]);
     const response = await fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&page=${page}&with_genres=${genreURL}`
     );
     const data = await response.json();
 
-    console.log(data);
-    setData(data.results);
-    SetNumOfPages(data.total_pages);
+    // console.log(data);
+    setMovieData(data.results);
+    setNumOfPages(data.total_pages);
+  };
+
+  const fetchingSearch = async (param) => {
+    setIsSearching(true);
+    setSelectedGenres([]);
+
+    if (param === "") {
+      fetchMovie();
+      return;
+    }
+    const response = await fetch(
+      `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${param}&page=${page}`
+    );
+    const data = await response.json();
+    setSearchData(data.results);
+    setNumOfPages(data.total_pages);
   };
 
   useEffect(() => {
-    fetchMovie();
-  }, [page, selectedGenres]);
+    if (isSearching) {
+      fetchingSearch(searchParam);
+    } else {
+      fetchMovie();
+    }
+  }, [searchParam, page, selectedGenres]);
 
   return (
     <section className="container">
@@ -49,26 +73,35 @@ const Movie = () => {
           selectedGenres={selectedGenres}
           setSelectedGenres={setSelectedGenres}
         />
-        <SearchBox />
+        <SearchBox
+          setSearchParam={setSearchParam}
+          searchParam={searchParam}
+          setIsSearching={setIsSearching}
+          fetchingSearch={fetchingSearch}
+          fetchData={fetchMovie}
+          setPage={setPage}
+        />
       </div>
+
       <div className="card-container">
-        {/* ?? */}
-        {(data.length === 0 ? Array.from({ length: 20 }) : data).map(
-          (MoiveCardData, index) =>
-            MoiveCardData ? (
+        {isSearching && searchData.length === 0 ? (
+          <p>{`No Results Related to "${searchParam}"`}</p>
+        ) : (
+          (isSearching ? searchData : movieData).map((MovieCardData, index) =>
+            MovieCardData ? (
               <MovieCard
-                key={MoiveCardData.id}
-                id={MoiveCardData.id}
+                key={MovieCardData.id}
+                id={MovieCardData.id}
                 title={
-                  MoiveCardData.title ||
-                  MoiveCardData.name ||
-                  MoiveCardData.original_name
+                  MovieCardData.title ||
+                  MovieCardData.name ||
+                  MovieCardData.original_name
                 }
-                type="movie"
-                poster={MoiveCardData.poster_path}
+                type={MovieCardData.media_type || "movie"}
+                poster={MovieCardData.poster_path}
                 date={
-                  MoiveCardData.release_date ||
-                  MoiveCardData.first_air_date ||
+                  MovieCardData.release_date ||
+                  MovieCardData.first_air_date ||
                   ""
                 }
               />
@@ -95,9 +128,14 @@ const Movie = () => {
                 <Skeleton animation="wave" />
               </Stack>
             )
+          )
         )}
       </div>
-      <PaginationRounded setPage={setPage} numOfPages={numOfPages} />
+      <PaginationRounded
+        setPage={setPage}
+        numOfPages={numOfPages}
+        page={page}
+      />
     </section>
   );
 };

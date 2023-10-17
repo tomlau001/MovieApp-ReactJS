@@ -2,7 +2,6 @@ import { Button } from "@mui/material";
 import "./Notfound.css";
 import { useNavigate } from "react-router-dom";
 
-
 const Notfound = () => {
   const navigate = useNavigate();
   return (
@@ -12,7 +11,7 @@ const Notfound = () => {
         Sorry, we can&#39;t find that page. You&#39;ll find lots to explore on
         the home page.
       </p>
-      <Button variant="outlined" style={{padding:"16px 24px"}} onClick={() => navigate("Home")}>
+      <Button variant="outlined" style={{padding:"16px 24px"}} onClick={() => navigate(-1)}>
         Back to Home Page
       </Button>
     </div>

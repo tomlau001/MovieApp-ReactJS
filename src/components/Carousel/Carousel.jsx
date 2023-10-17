@@ -63,7 +63,6 @@ const Carousel = ({ type }) => {
                             .reverse()
                             .join("/")})`}
                       </h4>
-                      //?
                     }
                     <p className="carousel-des">
                       {overview.length > 260

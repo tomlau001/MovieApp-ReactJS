@@ -8,6 +8,7 @@ import Modal from "@mui/material/Modal";
 import { useEffect, useState } from "react";
 import Recommendations from "../Recommendations/Recommendations";
 import "./MovieModal.css";
+import { API_KEY } from "../../config";
 
 const style = {
   position: "absolute",
@@ -23,7 +24,6 @@ const style = {
 };
 
 export default function MoiveModal({ children, id, type, date, title }) {
-  const API_KEY = `984691a982db0dc62bc0e27ae1c406b2`;
   const [details, setDetails] = useState([]);
   const [open, setOpen] = useState(false);
   const [video, setVideo] = useState([]);
@@ -41,7 +41,6 @@ export default function MoiveModal({ children, id, type, date, title }) {
       `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${API_KEY}`
     );
     const { results } = await response.json();
-
     if (results?.length > 0) {
       setVideo(results[0].key);
       return;
@@ -85,11 +84,7 @@ export default function MoiveModal({ children, id, type, date, title }) {
 
   return (
     <>
-      <Button
-        onClick={handleOpen}
-      >
-        {children}
-      </Button>
+      <Button onClick={handleOpen}>{children}</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -163,7 +158,6 @@ export default function MoiveModal({ children, id, type, date, title }) {
                     <span className="light-color">
                       genres:{" "}
                       <span>{genres.map((g) => g.name).join(", ")}</span>
-                      {/* question: join(",") && join(", ")  */}
                     </span>
                   )}
                   {vote_average ? (

@@ -2,33 +2,19 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import "./Recommendations.css";
-import MoiveModal from "../Modal/MovieModal";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { API_KEY } from "../../config";
 
 const Recommendations = ({ id, type }) => {
-  const API_KEY = `984691a982db0dc62bc0e27ae1c406b2`;
   const [recommendations, setRecommendtions] = useState([]);
-
   const currentYear = new Date().getFullYear().toString();
-  const theme = createTheme({
-    components: {
-      MuiButton: {
-        styleOverrides: {
-          root: {
-            padding: "0",
-          },
-        },
-      },
-    },
-  });
-
+  
   const fetchRecommend = async () => {
     const response = await fetch(
       `https://api.themoviedb.org/3/${type}/${id}/recommendations?api_key=${API_KEY}`
     );
     const { results } = await response.json();
-    console.log(results.slice(0, 6));
     setRecommendtions(results.slice(0, 6));
+    console.log(recommendations);
   };
 
   useEffect(() => {
@@ -63,24 +49,15 @@ const Recommendations = ({ id, type }) => {
             }) =>
               backdrop_path && (
                 <div key={id} className="RCM-card">
-                  <ThemeProvider theme={theme}>
-                    <MoiveModal
-                      type={type}
-                      id={id}
-                      name={name}
-                      title={title}
+                  <div className="RCM-img-container">
+                    <img
+                      src={`https://image.tmdb.org/t/p/w300/${backdrop_path}`}
+                      className="RCM-img"
+                      alt={title || name}
+                      title={title || name}
+                    />
+                  </div>
 
-                    >
-                      <div className="RCM-img-container">
-                        <img
-                          src={`https://image.tmdb.org/t/p/w300/${backdrop_path}`}
-                          className="RCM-img"
-                          alt={title || name}
-                          title={title || name}
-                        />
-                      </div>
-                    </MoiveModal>
-                  </ThemeProvider>
                   <div className="RCM-info">
                     <h2 className="RCM-title">{title || name}</h2>
                     <div className="RCM-subinfo">
