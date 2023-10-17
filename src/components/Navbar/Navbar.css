@@ -1,19 +1,41 @@
-.nav {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  padding-top: 48px;
-  padding-right: 36px;
-  padding-bottom: 24px;
-  column-gap: 4px;
+/* .navlink {
+  position: relative;
 }
 
-.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
-  color: rgb(225, 225, 225) !important;
+.navlink.active::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  border-bottom: 2px solid white;
+  bottom: 0;
+  left: 0;
+} */
+
+.nav {
+  padding: 32px 0 24px 0;
+}
+
+.nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav li {
+  display: inline-block;
 }
 
 .navlink {
   position: relative;
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  padding: 0 8px 12px 8px;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
 }
 
 .navlink.active::after {
@@ -26,8 +48,12 @@
 }
 
 @media screen and (max-width: 768px) {
-  .navlink button {
-    font-size: 12.5px;
+  .navlink {
+    font-size: 13.5px;
     text-wrap: nowrap;
+  }
+
+  .navlink .hide-text {
+    display: none;
   }
 }
