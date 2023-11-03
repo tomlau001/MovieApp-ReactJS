@@ -32,7 +32,7 @@ export default function PaginationRounded({ setPage, numOfPages, page }) {
         shape="rounded"
         page={paginationPage}
         onChange={handlePageChange}
-        siblingCount={2}
+        siblingCount={1}
         hidePrevButton={true}
         hideNextButton={true}
       />
