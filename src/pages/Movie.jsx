@@ -10,7 +10,6 @@ import SearchBox from "../components/SearchBox/SearchBox.jsx";
 import useDocsTitle from "../useDocsTitle";
 import { API_KEY } from "../config";
 
-
 const Movie = () => {
   const [movieData, setMovieData] = useState([]);
   const [page, setPage] = useState(1);
@@ -58,7 +57,11 @@ const Movie = () => {
     } else {
       fetchMovie();
     }
-  }, [searchParam, page, selectedGenres]);
+  }, [searchParam, page]);
+
+  useEffect(() => {
+    fetchMovie();
+  }, [selectedGenres]);
 
   return (
     <section className="container">

@@ -57,7 +57,11 @@ const TVseries = () => {
     } else {
       fetchTVseries();
     }
-  }, [searchParam, page, selectedGenres]);
+  }, [searchParam, page]);
+
+  useEffect(() => {
+    fetchTVseries();
+  }, [selectedGenres]);
 
   return (
     <section className="container">
